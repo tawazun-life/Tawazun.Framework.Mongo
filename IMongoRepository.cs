@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,6 +11,9 @@ namespace Tawazun.Framework.Mongo
 {
     public interface IMongoRepository<T> where T : BaseModel
     {
+        IMongoCollection<T> Collection { get; }
+        IQueryable<T> QueryableCollection {  get; }
+
         Task<T> GetByIdAsync(string id);
         Task<IEnumerable<T>> GetAllAsync();
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> filter);
